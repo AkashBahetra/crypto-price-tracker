@@ -27,6 +27,8 @@ export default function Home() {
   const [showLow, setShowLow] = useState(true);
   const [showHigh, setShowHigh] = useState(true);
   const [loading, setLoading] = useState(false);
+  const baseUrl = process.env.NEXT_PUBLIC_CG_BASE_URL;
+  const apiKey = process.env.NEXT_PUBLIC_CG_API_KEY;
 
   useEffect(() => {
     fetchCoinData(coinId);
@@ -43,10 +45,10 @@ export default function Home() {
 
   const fetchCoinData = (coinId: string) => {
     axios
-      .get(`https://api.coingecko.com/api/v3/coins/${coinId}/ohlc`, {
+      .get(`${baseUrl}/coins/${coinId}/ohlc`, {
         params: requestData,
         headers: {
-          'x-cg-api-key': 'CG-VnpbVjgkqEtMexwnvfHhQDgd', // Add your API key here
+          'x-cg-api-key': apiKey, // Add your API key here
         },
       })
       .then((res) => {
